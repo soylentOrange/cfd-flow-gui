@@ -36,7 +36,7 @@
 Simulating supersonic and compressible ejector/venturi nozzle aerodynamics requires:
 - **CAD & Setup**: FreeCAD with the CfdOF Workbench.
 - **Solvers & Meshing**: OpenFOAM (v2512) and the coupled high-speed solver **HiSA** (High-Speed Aerodynamic Solver) along with **cfMesh** and **Gmsh** running in an optimized Linux Docker container accelerated by Apple Silicon's Rosetta 2 virtualization.
-- **Post-Processing**: **VenturiPost**, a native Python/Tkinter GUI tailored specifically for extracting mass flow rates, standard volume flow rates ($Nl/min$), flow amplification factors, and center probe velocities/pressures directly from the case directories.
+- **Post-Processing**: **VenturiPost**, a native Python/Tkinter GUI tailored specifically for extracting mass flow rates, standard volume flow rates (Nl/min), flow amplification factors, and center probe velocities/pressures directly from the case directories.
 
 ---
 
@@ -53,7 +53,7 @@ Simulating supersonic and compressible ejector/venturi nozzle aerodynamics requi
 - **Standardized Norm Volume Flow Rates**:
   - Automatically computes mass flows and standard volume flow rates according to both ISO (20°C, 1.01325 bar, $\rho = 1.2041\,\text{kg/m}^3$) and DIN (0°C, 1.01325 bar, $\rho = 1.2930\,\text{kg/m}^3$).
 - **Flow Amplification Factor**:
-  - Computes the ejector entrainment efficiency (ratio $\dot{m}_{\text{plane}} / \dot{m}_{\text{inlet}}$).
+  - Computes the ejector entrainment efficiency (ratio of entrained plane mass flow to driving inlet nozzle mass flow).
 - **Centerline Probe Evaluation**:
   - Extracts local velocity magnitude $|U|$ (in $\text{m/s}$ and $\text{km/h}$), directional vector components $(U_x, U_y, U_z)$, and static pressure ($Pa$ and $\text{bar abs}$) at the target plane distance.
 - **Integrated Logging & Console Clear (`🗑️ Clear Console`)**:
@@ -79,7 +79,7 @@ Volumetric norm flow in $\text{Nl/min}$:
 Ratio of entrained plane mass flow to inlet nozzle mass flow:
 
 ```math
-\text{Flow Amplification Factor} = \frac{\dot{m}_{\text{plane}}}{\dot{m}_{\text{inlet}}}
+\text{Flow Amplification Factor} = \frac{{\dot{m}}_{\text{plane}}}{{\dot{m}}_{\text{inlet}}}
 ```
 
 ### CSV Export & Excel Compatibility
@@ -289,7 +289,7 @@ Completed CFD dependency check
    - Select the case directory with **Browse...**.
    - Parameters will be automatically loaded from `0/p` and `0/T` (or click **🔄 Reload from Case**).
    - Click **⚡ Start Analysis** to reconstruct and extract flow rates.
-   - View flow amplification factor, standard volume flows ($Nl/min$), and center probe velocity.
+   - View flow amplification factor, standard volume flows (Nl/min), and center probe velocity.
    - Click **📊 Export to CSV...** to append the run to your test matrix.
 
 ---
