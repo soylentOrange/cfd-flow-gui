@@ -1,6 +1,11 @@
 # VenturiPost & OpenFOAM CFD Environment Setup
 
-A dedicated post-processing GUI application and comprehensive simulation environment setup guide for compressible Venturi nozzle and ejector CFD simulations on macOS (Apple Silicon).
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Platform](https://img.shields.io/badge/Platform-macOS%20Apple%20Silicon-blue.svg)](https://apple.com)
+[![OpenFOAM](https://img.shields.io/badge/OpenFOAM-v2512-brightgreen.svg)](https://openfoam.com)
+[![Project: SmILE](https://img.shields.io/badge/Horizon%20Europe-SmILE%20101136376-orange.svg)](https://horizon-smile.eu/)
+
+**VenturiPost** is an automated post-processing GUI application and setup guide for compressible Venturi nozzle and ejector CFD simulations, coupling FreeCAD CfdOF and high-speed OpenFOAM/HiSA workflows in Docker on macOS Apple Silicon.
 
 ---
 
@@ -284,7 +289,7 @@ This project has received funding from the European Union's Horizon Europe resea
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <a href="https://commission.europa.eu">
-    <img src="https://european-union.europa.eu/themes/contrib/custom/euh/dist/images/logo/eu-logo-en.svg" alt="Funded by the European Union" height="60">
+    <img src="eu-funded.svg" alt="Funded by the European Union" height="60">
   </a>
 </p>
 
