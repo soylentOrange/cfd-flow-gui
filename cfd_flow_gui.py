@@ -2,11 +2,26 @@ import os
 import glob
 import re
 import math
+import shutil
 import subprocess
 import threading
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from tkinter.scrolledtext import ScrolledText
+
+# Ensure standard binary paths are in PATH (macOS GUI apps launched via Finder lack /usr/local/bin, /opt/homebrew/bin, etc.)
+_extra_paths = [
+    "/usr/local/bin",
+    "/opt/homebrew/bin",
+    "/opt/homebrew/sbin",
+    os.path.expanduser("~/.docker/bin"),
+    "/Applications/Docker.app/Contents/Resources/bin",
+]
+_path_parts = os.environ.get("PATH", "").split(os.pathsep)
+for _p in _extra_paths:
+    if _p not in _path_parts and os.path.exists(_p):
+        _path_parts.insert(0, _p)
+os.environ["PATH"] = os.pathsep.join(_path_parts)
 
 class CFDFlowGUI:
     def __init__(self, root):
@@ -402,8 +417,21 @@ class CFDFlowGUI:
         self.log(f"  -> Umgebung ({p_amb_abs/1e5:.3f} bar abs): rho = {rho_ambient:.4f} kg/m³")
         self.log("Starte Rekonstruktion und Auswertung im Docker-Container...")
 
+        docker_bin = (
+            shutil.which("docker")
+            or ("/usr/local/bin/docker" if os.path.exists("/usr/local/bin/docker") else None)
+            or ("/opt/homebrew/bin/docker" if os.path.exists("/opt/homebrew/bin/docker") else None)
+            or (os.path.expanduser("~/.docker/bin/docker") if os.path.exists(os.path.expanduser("~/.docker/bin/docker")) else None)
+            or "/Applications/Docker.app/Contents/Resources/bin/docker"
+        )
+        if not shutil.which(docker_bin) and not os.path.exists(docker_bin):
+            self.log("FEHLER: 'docker' Befehl wurde auf dem System nicht gefunden!")
+            self.log("Bitte sicherstellen, dass Docker Desktop installiert ist und läuft.")
+            messagebox.showerror("Docker Fehler", "Docker wurde nicht gefunden. Bitte sicherstellen, dass Docker Desktop installiert ist.")
+            return
+
         docker_cmd = (
-            f'docker run --platform linux/amd64 --rm '
+            f'"{docker_bin}" run --platform linux/amd64 --rm '
             f'-v "{case_dir}":/home/openfoam/run '
             f'-w /home/openfoam/run '
             f'{docker_img} '
@@ -417,7 +445,7 @@ class CFDFlowGUI:
 
         stdout_output = ""
         try:
-            proc = subprocess.run(docker_cmd, shell=True, capture_output=True, text=True)
+            proc = subprocess.run(docker_cmd, shell=True, env=os.environ, capture_output=True, text=True)
             stdout_output = proc.stdout
             if proc.returncode != 0:
                 self.log("FEHLER bei Docker-Ausführung:")

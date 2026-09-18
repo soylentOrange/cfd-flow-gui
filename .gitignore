@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyInstaller
+build/
+dist/
+*.spec
+
+# Conda / Virtualenv
+.conda/
+.venv/
+env/
+venv/
+
+# macOS
+.DS_Store
+
