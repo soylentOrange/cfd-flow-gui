@@ -1,3 +1,6 @@
+# Copyright (c) 2026 soylentOrange
+# Licensed under the MIT License
+
 import os
 import sys
 import glob
@@ -186,6 +189,10 @@ class CFDFlowGUI:
             label="CfdOF OpenFOAM Docker GitHub (kktse)",
             command=lambda: self._open_url("https://github.com/kktse/cfdof-openfoam-docker")
         )
+        help_menu.add_command(
+            label="SmILE Project Website",
+            command=lambda: self._open_url("https://horizon-smile.eu/")
+        )
         help_menu.add_separator()
         help_menu.add_command(
             label="Documentation (README)",
@@ -224,7 +231,7 @@ class CFDFlowGUI:
             justify="center"
         ).pack(pady=(0, 14))
 
-        ttk.Label(frame, text="GitHub Repositories:", font=("Helvetica", 11, "bold")).pack(anchor="w", pady=(0, 4))
+        ttk.Label(frame, text="Links & References:", font=("Helvetica", 11, "bold")).pack(anchor="w", pady=(0, 4))
 
         link1 = ttk.Label(frame, text="• VenturiPost (cfd-flow-gui)", foreground="#0066cc", cursor="pointinghand")
         link1.pack(anchor="w", pady=2)
@@ -234,8 +241,20 @@ class CFDFlowGUI:
         link2.pack(anchor="w", pady=2)
         link2.bind("<Button-1>", lambda e: self._open_url("https://github.com/kktse/cfdof-openfoam-docker"))
 
+        link3 = ttk.Label(frame, text="• SmILE Project Website (horizon-smile.eu)", foreground="#0066cc", cursor="pointinghand")
+        link3.pack(anchor="w", pady=2)
+        link3.bind("<Button-1>", lambda e: self._open_url("https://horizon-smile.eu/"))
+
         btn_close = ttk.Button(frame, text="Close", command=about_win.destroy)
-        btn_close.pack(pady=(18, 0))
+        btn_close.pack(pady=(18, 6))
+
+        ttk.Label(
+            frame, 
+            text="Copyright © 2026 soylentOrange\nLicensed under the MIT License", 
+            font=("Helvetica", 9), 
+            foreground="#666666",
+            justify="center"
+        ).pack()
 
         # Center dialog relative to main window
         about_win.update_idletasks()

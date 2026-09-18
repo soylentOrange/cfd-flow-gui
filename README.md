@@ -21,6 +21,8 @@ A dedicated post-processing GUI application and comprehensive simulation environ
    - [Phase 5: FreeCAD Parameter Registration](#phase-5-freecad-parameter-registration)
    - [Phase 6: Verification](#phase-6-verification)
 4. [Typical Simulation & Analysis Workflow](#typical-simulation--analysis-workflow)
+5. [Acknowledgements & Funding](#acknowledgements--funding)
+6. [License](#license)
 
 ---
 
@@ -270,3 +272,29 @@ Completed CFD dependency check
    - View flow amplification factor, standard volume flows ($Nl/min$), and center probe velocity.
    - Click **📊 Export to CSV...** to append the run to your test matrix.
 
+---
+
+## Acknowledgements & Funding
+
+This project has received funding from the European Union's Horizon Europe research and innovation programme under grant agreement No. **101136376** ([**SmILE** – *Smart Implants for Life Enrichment*](https://horizon-smile.eu/)).
+
+<p align="left">
+  <a href="https://horizon-smile.eu/">
+    <img src="Smile-logo.svg" alt="SmILE Project Logo" height="60">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://commission.europa.eu">
+    <img src="https://european-union.europa.eu/themes/contrib/custom/euh/dist/images/logo/eu-logo-en.svg" alt="Funded by the European Union" height="60">
+  </a>
+</p>
+
+* **Project Website:** [https://horizon-smile.eu/](https://horizon-smile.eu/)
+
+*Disclaimer:* Funded by the European Union. Views and opinions expressed are however those of the author(s) only and do not necessarily reflect those of the European Union or the European Health and Digital Executive Agency (HADEA). Neither the European Union nor the granting authority can be held responsible for them.
+
+---
+
+## License
+
+This project is licensed under the **MIT License** ([MIT](LICENSE)).
+For details, please refer to the [LICENSE](LICENSE) file.
