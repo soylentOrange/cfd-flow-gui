@@ -53,8 +53,7 @@ Simulating supersonic and compressible ejector/venturi nozzle aerodynamics requi
 - **Standardized Norm Volume Flow Rates**:
   - Automatically computes mass flows and standard volume flow rates according to both ISO (20°C, 1.01325 bar, $\rho = 1.2041\,\text{kg/m}^3$) and DIN (0°C, 1.01325 bar, $\rho = 1.2930\,\text{kg/m}^3$).
 - **Flow Amplification Factor**:
-  - Computes the ejector entrainment efficiency:
-    $\text{Flow Amplification Factor} = \frac{\dot{m}_{\text{plane}}}{\dot{m}_{\text{inlet}}}$
+  - Computes the ejector entrainment efficiency (ratio $\dot{m}_{\text{plane}} / \dot{m}_{\text{inlet}}$).
 - **Centerline Probe Evaluation**:
   - Extracts local velocity magnitude $|U|$ (in $\text{m/s}$ and $\text{km/h}$), directional vector components $(U_x, U_y, U_z)$, and static pressure ($Pa$ and $\text{bar abs}$) at the target plane distance.
 - **Integrated Logging & Console Clear (`🗑️ Clear Console`)**:
@@ -62,26 +61,26 @@ Simulating supersonic and compressible ejector/venturi nozzle aerodynamics requi
 
 ### Calculations & Key Metrics
 
-1. **Gas Densities**:
-   Ideal gas law based on specific gas constant $R = 287.058\,\text{J/(kg}\cdot\text{K)}$:
+#### 1. Gas Densities
+Ideal gas law based on specific gas constant $R = 287.058\,\text{J/(kg}\cdot\text{K)}$:
 
-   $$
-   \rho = \frac{p_{\text{abs}}}{R \cdot T_{\text{Kelvin}}}
-   $$
+```math
+\rho = \frac{p_{\text{abs}}}{R \cdot T_{\text{Kelvin}}}
+```
 
-2. **Standard Volume Flow**:
-   Volumetric norm flow in ISO and DIN ($\text{Nl/min}$):
+#### 2. Standard Volume Flow (ISO & DIN)
+Volumetric norm flow in $\text{Nl/min}$:
 
-   $$
-   \dot{V}_{\text{norm}} = \frac{\dot{m} \cdot 60}{\rho_{\text{norm}}} \times 1000 \quad [\text{Nl/min}]
-   $$
+```math
+\dot{V}_{\text{norm}} = \frac{\dot{m} \cdot 60}{\rho_{\text{norm}}} \times 1000 \quad [\text{Nl/min}]
+```
 
-3. **Flow Amplification Factor**:
-   Ratio of entrained plane mass flow to inlet nozzle mass flow:
+#### 3. Flow Amplification Factor
+Ratio of entrained plane mass flow to inlet nozzle mass flow:
 
-   $$
-   \text{Flow Amplification Factor} = \frac{\dot{m}_{\text{plane}}}{\dot{m}_{\text{inlet}}}
-   $$
+```math
+\text{Flow Amplification Factor} = \frac{\dot{m}_{\text{plane}}}{\dot{m}_{\text{inlet}}}
+```
 
 ### CSV Export & Excel Compatibility
 - **`📊 Export to CSV...`**: Appends each evaluated run as a new row in a cumulative CSV file.
