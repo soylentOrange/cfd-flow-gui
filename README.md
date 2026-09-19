@@ -10,6 +10,7 @@
 ---
 
 ## Table of Contents
+
 1. [Overview](#overview)
 2. [VenturiPost GUI Application](#venturipost-gui-application)
    - [Features](#features)
@@ -34,6 +35,7 @@
 ## Overview
 
 Simulating supersonic and compressible ejector/venturi nozzle aerodynamics requires:
+
 - **CAD & Setup**: FreeCAD with the CfdOF Workbench.
 - **Solvers & Meshing**: OpenFOAM (v2512) and the coupled high-speed solver **HiSA** (High-Speed Aerodynamic Solver) along with **cfMesh** and **Gmsh** running in an optimized Linux Docker container accelerated by Apple Silicon's Rosetta 2 virtualization.
 - **Post-Processing**: **VenturiPost**, a native Python/Tkinter GUI tailored specifically for extracting mass flow rates, standard volume flow rates (Nl/min), flow amplification factors, and center probe velocities/pressures directly from the case directories.
@@ -46,6 +48,7 @@ Simulating supersonic and compressible ejector/venturi nozzle aerodynamics requi
 
 ### Features
 - **Automatic Parameter Detection (`🔄 Reload from Case`)**:
+
   - Scans `0/p` and `0/T` for boundary conditions and internal fields.
   - Automatically parses inlet gauge pressure, ambient pressure, temperature, and patch names.
 - **Docker-Coupled Post-Processing (`⚡ Start Analysis`)**:
@@ -69,6 +72,7 @@ Ideal gas law based on specific gas constant $R = 287.058\,\text{J/(kg}\cdot\tex
 ```
 
 #### 2. Standard Volume Flow (ISO & DIN)
+
 Volumetric norm flow in $\text{Nl/min}$:
 
 ```math
@@ -83,6 +87,7 @@ Ratio of entrained plane mass flow to inlet nozzle mass flow:
 ```
 
 ### CSV Export & Excel Compatibility
+
 - **`📊 Export to CSV...`**: Appends each evaluated run as a new row in a cumulative CSV file.
 - **Locale-Aware Formatting**:
   - Dynamically detects the system locale decimal delimiter (`.` or `,`).
@@ -90,12 +95,14 @@ Ratio of entrained plane mass flow to inlet nozzle mass flow:
   - Safely handles open-file locks with user-friendly retry warnings if the file is currently locked in Excel.
 
 ### Running VenturiPost
+
 Launch using Python (Tkinter required):
 ```bash
 python cfd_flow_gui.py
 ```
 
 ### Building Standalone App (`.app`)
+
 To build the macOS application bundle [`dist/VenturiPost.app`](dist/VenturiPost.app):
 ```bash
 pyinstaller --noconsole --windowed --name "VenturiPost" --icon "VenturiPost.icns" --noconfirm cfd_flow_gui.py
@@ -125,17 +132,21 @@ This guide documents how to establish the complete FreeCAD CfdOF + OpenFOAM + Hi
 ### Phase 1: Prerequisites & Application Installation
 
 #### 1. Install Rosetta 2
+
 Rosetta 2 is required by Docker to run emulated x86_64 Linux containers at near-native speed:
+
 ```bash
 softwareupdate --install-rosetta --agree-to-license
 ```
 
 #### 2. Install Applications via Homebrew
+
 ```bash
 brew install --cask freecad paraview docker
 ```
 
 #### 3. Docker Desktop Configuration
+
 1. Launch Docker Desktop (`open -a Docker`).
 2. Go to **Settings (gear icon) > General**:
    - Enable **Use Virtualization framework**.
@@ -147,6 +158,7 @@ brew install --cask freecad paraview docker
 ### Phase 2: Platform Isolation (Host vs FreeCAD)
 
 Isolate x86 emulation to FreeCAD so that host terminal sessions remain native ARM64:
+
 ```bash
 mkdir -p "$HOME/Library/Application Support/FreeCAD/v1-1/Mod/FixDockerPlatform"
 
@@ -161,6 +173,7 @@ EOF
 ### Phase 3: Custom Docker Image Build (`opencfd-mac`)
 
 The base image is pulled from the unofficial CfdOF OpenFOAM repository by **kktse**:
+
 - **Upstream Repository**: [https://github.com/kktse/cfdof-openfoam-docker](https://github.com/kktse/cfdof-openfoam-docker)
 - **Base Image URL**: `ghcr.io/kktse/cfdof-openfoam:opencfd`
 - **Current Version Baseline**:
@@ -171,6 +184,7 @@ The base image is pulled from the unofficial CfdOF OpenFOAM repository by **kkts
 > [!NOTE]
 > **Troubleshooting / Fallback after Upstream Updates**:
 > The tag `:opencfd` tracks the latest build on GitHub Container Registry (GHCR). If a future upstream update introduces breaking changes or incompatible libraries, you can clone the repository at commit `65b3c79` and build the base image manually:
+
 > ```bash
 > git clone https://github.com/kktse/cfdof-openfoam-docker.git
 > cd cfdof-openfoam-docker
@@ -179,6 +193,7 @@ The base image is pulled from the unofficial CfdOF OpenFOAM repository by **kkts
 > ```
 
 #### Build Instructions:
+
 Build the customized image containing modern Gmsh and properly registered HiSA libraries:
 ```bash
 mkdir -p ~/cfdof-build && cd ~/cfdof-build
@@ -209,6 +224,7 @@ docker build --platform linux/amd64 -t cfdof-openfoam:opencfd-mac .
 ### Phase 4: Patching CfdOF Source (`CfdTools.py`)
 
 Patch CfdOF in FreeCAD to support built-in cfMesh and correct HiSA version banner detection:
+
 ```bash
 python3 -c '
 import os, re
@@ -243,6 +259,7 @@ print("CfdTools.py patched successfully!")
 ### Phase 5: FreeCAD Parameter Registration
 
 Open FreeCAD, navigate to **View > Panels > Python console**, and run:
+
 ```python
 import FreeCAD
 p = FreeCAD.ParamGet("User parameter:BaseApp/Preferences/Mod/CfdOF")
@@ -257,6 +274,7 @@ print("Locked to cfdof-openfoam:opencfd-mac")
 ### Phase 6: Verification
 
 Run the dependency check in FreeCAD CfdOF (**CfdOF > Check dependencies**). The output should report:
+
 ```text
 Checking dependencies...
 FreeCAD version: 1.1
