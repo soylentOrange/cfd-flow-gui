@@ -126,7 +126,7 @@ The [`Example/`](Example/) directory contains a complete reference simulation ca
 > Connecting the 3D-printed nozzle to a compressor might cause serious damage.
 > Use at your own risk!
 
-### ParaView Streamline Visualization**
+### ParaView Streamline Visualization
 
 <p align="center">
   <img src="Example/paraview.png" alt="ParaView Streamline Visualization of Venturi Ejector Flow" width="900">
