@@ -121,10 +121,7 @@ The [`Example/`](Example/) directory contains a complete reference simulation ca
 
 - **FreeCAD Simulation Setup**: [`Example/CFD Venturi 2mm.FCStd`](Example/CFD%20Venturi%202mm.FCStd) — 3D CAD model and CfdOF boundary/case setup.
 - **Nozzle Geometry (STL)**: [`Example/CFD Venturi 2mm-Venturi Nozzle.stl`](Example/CFD%20Venturi%202mm-Venturi%20Nozzle.stl) — Exported 3D nozzle surface for 3D printing. Connects to compressor with 1/4 BSP fitting.
-
-    > [!CAUTION] 
-    > Use at your own risk!
-
+    > ⚠️ **CAUTION:** Use at your own risk!
 - **ParaView Streamline Visualization**:
 
 <p align="center">
