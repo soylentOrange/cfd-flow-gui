@@ -124,7 +124,7 @@ The [`Example/`](Example/) directory contains a complete reference simulation ca
 - **ParaView Streamline Visualization**:
 
 > [!CAUTION]
-> Connection the 3D-printed nozzle to a compressor might cause serious damage.
+> Connecting the 3D-printed nozzle to a compressor might cause serious damage.
 > Use at your own risk!
 
 <p align="center">
