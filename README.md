@@ -153,6 +153,14 @@ brew install --cask freecad paraview docker
    - Enable **Use Rosetta for x86/amd64 emulation on Apple Silicon**.
 3. Click **Apply & restart**.
 
+#### 4. Install CfdOF Workbench in FreeCAD
+
+1. Launch FreeCAD (`open -a FreeCAD`).
+2. Open the Addon Manager via **Tools > Addon manager** (or **Werkzeuge > Addon-Manager**).
+3. Under the **Workbenches** tab, search for **CfdOF**.
+4. Select **CfdOF** and click **Install**.
+5. Restart FreeCAD when prompted so the workbench and its folder structure (`~/Library/Application Support/FreeCAD/v1-1/Mod/CfdOF`) are registered.
+
 ---
 
 ### Phase 2: Platform Isolation (Host vs FreeCAD)
